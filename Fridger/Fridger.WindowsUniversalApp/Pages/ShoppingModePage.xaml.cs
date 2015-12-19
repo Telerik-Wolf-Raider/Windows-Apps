@@ -41,7 +41,7 @@ namespace Fridger.WindowsUniversalApp.Pages
             contentViewModel.Products = GetProductsList(contentViewModel);
             this.ViewModel = new ShoppingPageViewModel(contentViewModel);
         }
-
+        
         private IEnumerable<ProductViewModel> GetProductsList(ProductsContentViewModel contentViewModel)
         {
             // here you can get the products from the server 
