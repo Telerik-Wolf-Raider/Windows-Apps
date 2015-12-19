@@ -32,9 +32,12 @@
                 <AppBarButton Content="Households"
                           Click="OnAddAppBarButtonClick"
                           Icon="Add"/>
-                <AppBarButton Content="Settings"
-                          Click="OnAddAppBarButtonClick"
+                <AppBarButton Content="ShoppingMode"
+                          Click="OnShoppingModeAppBarButtonClick"
                           Icon="Add"/>
+                <AppBarButton Content="Settings"
+                          Click="OnSettingsAppBarButtonClick"
+                          Icon="Setting"/>
             </StackPanel>
         </AppBar>
     </Page.BottomAppBar>

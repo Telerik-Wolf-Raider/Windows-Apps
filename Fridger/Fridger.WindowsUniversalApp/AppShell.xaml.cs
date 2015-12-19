@@ -56,5 +56,15 @@ namespace Fridger.WindowsUniversalApp
         {
             this.AppFrame.Navigate(typeof(LoginPage));
         }
+
+        private void OnShoppingModeAppBarButtonClick(object sender, RoutedEventArgs e)
+        {
+            this.AppFrame.Navigate(typeof(ShoppingModePage));
+        }
+
+        private void OnSettingsAppBarButtonClick(object sender, RoutedEventArgs e)
+        {
+            this.AppFrame.Navigate(typeof(SettingsPage));
+        }
     }
 }
