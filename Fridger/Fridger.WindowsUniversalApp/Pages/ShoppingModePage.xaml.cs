@@ -21,25 +21,74 @@ namespace Fridger.WindowsUniversalApp.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class ShoppingModePage : Page
+    public sealed partial class ShoppingModePage 
     {
+        private string pageTitle;
         public ShoppingModePage()
         {
             this.InitializeComponent();
-            this.Products = new List<ProductViewModel>() {
-
-                new ProductViewModel { ImgSource = "https://i.ytimg.com/vi/UIrEM_9qvZU/maxresdefault.jpg", ProductName="Product name 1" },
+            var contentViewModel = new ProductsContentViewModel();
+            contentViewModel.Products = new List<ProductViewModel>()
+      {
+      new ProductViewModel { ImgSource = "https://i.ytimg.com/vi/UIrEM_9qvZU/maxresdefault.jpg", ProductName="Product name 1" },
                 new ProductViewModel { ImgSource = "https://i.ytimg.com/vi/UIrEM_9qvZU/maxresdefault.jpg", ProductName="Product name 2" },
                 new ProductViewModel { ImgSource = "https://i.ytimg.com/vi/UIrEM_9qvZU/maxresdefault.jpg", ProductName="Product name 3" },
                 new ProductViewModel { ImgSource = "https://i.ytimg.com/vi/UIrEM_9qvZU/maxresdefault.jpg", ProductName="Product name 4" },
-            };
-            this.ProductTest = new ProductViewModel { ImgSource = "https://i.ytimg.com/vi/UIrEM_9qvZU/maxresdefault.jpg", ProductName = "Product name 1" };
-
-            this.DataContext = Products;
+      };
+            this.ContentViewModel = contentViewModel;
+            this.ViewModel = new ShoppingPageViewModel(contentViewModel);
         }
+
+        public ShoppingPageViewModel ViewModel
+        {
+            get
+            {
+                return this.DataContext as ShoppingPageViewModel;
+            }
+            set
+            {
+                this.DataContext = value;
+            }
+        }
+
+      ////  public ShoppingModePage()
+      ////  {
+      ////      this.InitializeComponent();
+
+      ////      this.pageTitle = "Shopping Mode Page";
+      ////      this.Products = new List<ProductViewModel>() {
+
+      ////          new ProductViewModel { ImgSource = "https://i.ytimg.com/vi/UIrEM_9qvZU/maxresdefault.jpg", ProductName="Product name 1" },
+      ////          new ProductViewModel { ImgSource = "https://i.ytimg.com/vi/UIrEM_9qvZU/maxresdefault.jpg", ProductName="Product name 2" },
+      ////          new ProductViewModel { ImgSource = "https://i.ytimg.com/vi/UIrEM_9qvZU/maxresdefault.jpg", ProductName="Product name 3" },
+      ////          new ProductViewModel { ImgSource = "https://i.ytimg.com/vi/UIrEM_9qvZU/maxresdefault.jpg", ProductName="Product name 4" },
+      ////      };
+
+      ////      //https://littlemissobsessivesanatomy.files.wordpress.com/2012/07/happy-batman2.jpg
+      ////      var contentViewModel = new ProductsContentViewModel();
+      ////      contentViewModel.Products = new List<ProductViewModel>()
+      ////{
+      ////new ProductViewModel { ImgSource = "https://i.ytimg.com/vi/UIrEM_9qvZU/maxresdefault.jpg", ProductName="Product name 1" },
+      ////          new ProductViewModel { ImgSource = "https://i.ytimg.com/vi/UIrEM_9qvZU/maxresdefault.jpg", ProductName="Product name 2" },
+      ////          new ProductViewModel { ImgSource = "https://i.ytimg.com/vi/UIrEM_9qvZU/maxresdefault.jpg", ProductName="Product name 3" },
+      ////          new ProductViewModel { ImgSource = "https://i.ytimg.com/vi/UIrEM_9qvZU/maxresdefault.jpg", ProductName="Product name 4" },
+      ////};
+      ////      this.ContentViewModel = contentViewModel;
+      ////      this.DataContext = this.Products;
+      ////  }
+
+        public IContentViewModel ContentViewModel { get; set; }
 
         public IEnumerable<ProductViewModel> Products { get; set; }
 
         public ProductViewModel ProductTest { get; set; }
+
+        public string Title
+        {
+            get
+            {
+                return this.pageTitle;
+            }
+        }
     }
 }

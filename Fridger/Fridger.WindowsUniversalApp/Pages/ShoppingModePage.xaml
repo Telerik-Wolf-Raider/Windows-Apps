@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Fridger.WindowsUniversalApp.Controls"
+    xmlns:viewModels="using:Fridger.WindowsUniversalApp.ViewModels"
     mc:Ignorable="d">
     <Page.Resources>
         <DataTemplate x:Key="productItemTemplate">
@@ -16,8 +17,31 @@
         </DataTemplate>
     </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBlock  Style="{StaticResource TitleStyle}" 
-            Text="Shopping mode activated"></TextBlock>
-            <!--TODO: list of products--> 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid Name="panelTitle"
+              Grid.Row="0">
+            <TextBlock Text="{Binding Title}" 
+                       Style="{StaticResource TitleStyle}"/>
+        </Grid>
+        <!--<ListBox ItemsSource="{Binding Products}"
+                 Grid.Row="2">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding ProductName}" />
+
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>-->
+        <Grid Name="panelContent"
+              Grid.Row="1">
+            <ListBox ItemsSource="{Binding ContentViewModel.Products}"
+                     ItemTemplate="{StaticResource productItemTemplate}"/>
+        </Grid>
+
     </Grid>
 </Page>
