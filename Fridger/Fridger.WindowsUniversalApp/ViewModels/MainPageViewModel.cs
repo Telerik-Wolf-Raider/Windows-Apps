@@ -21,6 +21,8 @@ namespace Fridger.WindowsUniversalApp.ViewModels
             }
         }
 
+        public IEnumerable<ProductViewModel> Products { get; set; }
+
         public IContentViewModel ContentViewModel { get; set; }
     }
 }

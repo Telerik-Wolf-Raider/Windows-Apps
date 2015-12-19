@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Fridger.WindowsUniversalApp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +26,20 @@ namespace Fridger.WindowsUniversalApp.Pages
         public ShoppingModePage()
         {
             this.InitializeComponent();
+            this.Products = new List<ProductViewModel>() {
+
+                new ProductViewModel { ImgSource = "https://i.ytimg.com/vi/UIrEM_9qvZU/maxresdefault.jpg", ProductName="Product name 1" },
+                new ProductViewModel { ImgSource = "https://i.ytimg.com/vi/UIrEM_9qvZU/maxresdefault.jpg", ProductName="Product name 2" },
+                new ProductViewModel { ImgSource = "https://i.ytimg.com/vi/UIrEM_9qvZU/maxresdefault.jpg", ProductName="Product name 3" },
+                new ProductViewModel { ImgSource = "https://i.ytimg.com/vi/UIrEM_9qvZU/maxresdefault.jpg", ProductName="Product name 4" },
+            };
+            this.ProductTest = new ProductViewModel { ImgSource = "https://i.ytimg.com/vi/UIrEM_9qvZU/maxresdefault.jpg", ProductName = "Product name 1" };
+
+            this.DataContext = Products;
         }
+
+        public IEnumerable<ProductViewModel> Products { get; set; }
+
+        public ProductViewModel ProductTest { get; set; }
     }
 }

@@ -34,7 +34,7 @@
                           Icon="Add"/>
                 <AppBarButton Content="ShoppingMode"
                           Click="OnShoppingModeAppBarButtonClick"
-                          Icon="Add"/>
+                          Icon="Shop"/>
                 <AppBarButton Content="Settings"
                           Click="OnSettingsAppBarButtonClick"
                           Icon="Setting"/>

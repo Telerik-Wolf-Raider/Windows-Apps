@@ -5,9 +5,19 @@
     xmlns:local="using:Fridger.WindowsUniversalApp.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Fridger.WindowsUniversalApp.Controls"
     mc:Ignorable="d">
-
+    <Page.Resources>
+        <DataTemplate x:Key="productItemTemplate">
+            <controls:ProductDetails                                   
+                                  Source="{Binding ImgSource}"
+                                  ProductName="{Binding ProductName}"
+                                  Swipe="{Binding Move}"/>
+        </DataTemplate>
+    </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+        <TextBlock  Style="{StaticResource TitleStyle}" 
+            Text="Shopping mode activated"></TextBlock>
+            <!--TODO: list of products--> 
     </Grid>
 </Page>
