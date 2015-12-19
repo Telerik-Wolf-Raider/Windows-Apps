@@ -36,15 +36,23 @@ namespace Fridger.WindowsUniversalApp.Pages
             this.geolocator = new Geolocator();
 
             var contentViewModel = new ProductsContentViewModel();
-            contentViewModel.Products = new List<ProductViewModel>()
+
+            this.ContentViewModel = contentViewModel;
+            contentViewModel.Products =  GetProductsList(contentViewModel);
+            this.ViewModel = new ShoppingPageViewModel(contentViewModel);
+        }
+
+        private  IEnumerable<ProductViewModel> GetProductsList(ProductsContentViewModel contentViewModel)
+        {
+            // here you can get the products from the server 
+            
+            return new List<ProductViewModel>()
                       {
                       new ProductViewModel { ImgSource = "https://i.ytimg.com/vi/UIrEM_9qvZU/maxresdefault.jpg", ProductName="Product name 1" },
                                 new ProductViewModel { ImgSource = "https://i.ytimg.com/vi/UIrEM_9qvZU/maxresdefault.jpg", ProductName="Product name 2" },
                                 new ProductViewModel { ImgSource = "https://i.ytimg.com/vi/UIrEM_9qvZU/maxresdefault.jpg", ProductName="Product name 3" },
                                 new ProductViewModel { ImgSource = "https://i.ytimg.com/vi/UIrEM_9qvZU/maxresdefault.jpg", ProductName="Product name 4" },
                       };
-            this.ContentViewModel = contentViewModel;
-            this.ViewModel = new ShoppingPageViewModel(contentViewModel);
         }
 
         public ShoppingPageViewModel ViewModel
