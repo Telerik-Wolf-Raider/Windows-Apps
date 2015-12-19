@@ -10,7 +10,8 @@
     mc:Ignorable="d">
     <Page.Resources>
         <DataTemplate x:Key="productItemTemplate">
-            <controls:ProductDetails                                   
+            <controls:ProductDetails    
+                DoubleTapped="ProductDetails_DoubleTapped"
                                   Source="{Binding ImgSource}"
                                   ProductName="{Binding ProductName}"
                                   Swipe="{Binding Move}"/>
@@ -25,18 +26,7 @@
               Grid.Row="0">
             <TextBlock Text="{Binding Title}" 
                        Style="{StaticResource TitleStyle}"/>
-        </Grid>
-        <!--<ListBox ItemsSource="{Binding Products}"
-                 Grid.Row="2">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding ProductName}" />
-
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>-->
+        </Grid>        
         <Grid Name="panelContent"
               Grid.Row="1">
             <ListBox ItemsSource="{Binding ContentViewModel.Products}"
