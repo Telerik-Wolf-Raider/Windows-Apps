@@ -38,20 +38,20 @@ namespace Fridger.WindowsUniversalApp.Pages
             var contentViewModel = new ProductsContentViewModel();
 
             this.ContentViewModel = contentViewModel;
-            contentViewModel.Products =  GetProductsList(contentViewModel);
+            contentViewModel.Products = GetProductsList(contentViewModel);
             this.ViewModel = new ShoppingPageViewModel(contentViewModel);
         }
 
-        private  IEnumerable<ProductViewModel> GetProductsList(ProductsContentViewModel contentViewModel)
+        private IEnumerable<ProductViewModel> GetProductsList(ProductsContentViewModel contentViewModel)
         {
             // here you can get the products from the server 
-            
+
             return new List<ProductViewModel>()
                       {
-                      new ProductViewModel { ImgSource = "https://i.ytimg.com/vi/UIrEM_9qvZU/maxresdefault.jpg", ProductName="Product name 1" },
-                                new ProductViewModel { ImgSource = "https://i.ytimg.com/vi/UIrEM_9qvZU/maxresdefault.jpg", ProductName="Product name 2" },
-                                new ProductViewModel { ImgSource = "https://i.ytimg.com/vi/UIrEM_9qvZU/maxresdefault.jpg", ProductName="Product name 3" },
-                                new ProductViewModel { ImgSource = "https://i.ytimg.com/vi/UIrEM_9qvZU/maxresdefault.jpg", ProductName="Product name 4" },
+                            new ProductViewModel { ImgSource = "https://i.ytimg.com/vi/UIrEM_9qvZU/maxresdefault.jpg", ProductName="Product name 1" },
+                            new ProductViewModel { ImgSource = "https://i.ytimg.com/vi/UIrEM_9qvZU/maxresdefault.jpg", ProductName="Product name 2" },
+                            new ProductViewModel { ImgSource = "https://i.ytimg.com/vi/UIrEM_9qvZU/maxresdefault.jpg", ProductName="Product name 3" },
+                            new ProductViewModel { ImgSource = "https://i.ytimg.com/vi/UIrEM_9qvZU/maxresdefault.jpg", ProductName="Product name 4" },
                       };
         }
 
@@ -89,6 +89,14 @@ namespace Fridger.WindowsUniversalApp.Pages
             var dialog = new MessageDialog(message);
             dialog.Commands.Add(new UICommand("OK"));
             await dialog.ShowAsync();
+            if (product.Opacity < 1)
+            {
+                product.Opacity = 1;
+            }
+            else
+            {
+                product.Opacity = 0.1;
+            }
         }
 
         private async void OnSaveCurrentLocationClick(object sender, RoutedEventArgs e)
@@ -112,7 +120,7 @@ namespace Fridger.WindowsUniversalApp.Pages
             }
             else
             {
-                var dialog = new MessageDialog("You denied geolocation!");
+                var dialog = new MessageDialog("You denied geolocation or you don't have a gps enabled. Current location isnt saved!");
                 dialog.Commands.Add(new UICommand("OK"));
                 await dialog.ShowAsync();
             }
