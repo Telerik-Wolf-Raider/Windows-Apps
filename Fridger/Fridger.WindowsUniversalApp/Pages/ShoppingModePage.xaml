@@ -20,15 +20,17 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Grid Name="panelTitle"
               Grid.Row="0">
             <TextBlock Text="{Binding Title}" 
                        Style="{StaticResource TitleStyle}"/>
-        </Grid>        
+        </Grid>
+        <Button Content="Save current location" Click="OnSaveCurrentLocationClick"/>
         <Grid Name="panelContent"
-              Grid.Row="1">
+              Grid.Row="2">
             <ListBox ItemsSource="{Binding ContentViewModel.Products}"
                      ItemTemplate="{StaticResource productItemTemplate}"/>
         </Grid>
