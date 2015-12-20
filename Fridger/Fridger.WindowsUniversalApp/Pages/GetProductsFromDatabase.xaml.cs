@@ -14,7 +14,7 @@
     using Windows.UI.Xaml;
     using Windows.UI.Xaml.Controls;
     using Models;
-
+    using Windows.UI.Xaml.Media.Animation;
     public sealed partial class GetProductsFromDatabase : Page
     {
         public GetProductsFromDatabase()
@@ -22,7 +22,7 @@
             this.InitializeComponent();
             this.InitAsync();
         }
-
+    
         private async void AddNewItemButtonClick(object sender, RoutedEventArgs e)
         {
             var price = 0;

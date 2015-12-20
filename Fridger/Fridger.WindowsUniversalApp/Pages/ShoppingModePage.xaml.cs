@@ -1,14 +1,20 @@
 ﻿using Fridger.WindowsUniversalApp.Controls;
+using Fridger.WindowsUniversalApp.Models;
 using Fridger.WindowsUniversalApp.ViewModels;
+using SQLite.Net;
+using SQLite.Net.Async;
+using SQLite.Net.Platform.WinRT;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text;
 using System.Threading;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -17,6 +23,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -34,15 +41,60 @@ namespace Fridger.WindowsUniversalApp.Pages
         {
             this.InitializeComponent();
             this.geolocator = new Geolocator();
+            this.InitAsync();
 
             var contentViewModel = new ProductsContentViewModel();
 
             this.ContentViewModel = contentViewModel;
-            contentViewModel.Products = GetProductsList(contentViewModel);
+            contentViewModel.Products = GetProductsList();
             this.ViewModel = new ShoppingPageViewModel(contentViewModel);
         }
-        
-        private IEnumerable<ProductViewModel> GetProductsList(ProductsContentViewModel contentViewModel)
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+            AnimatedTransition();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            AnimatedTransition();
+        }
+
+        public void AnimatedTransition()
+        {
+            TransitionCollection collection = new TransitionCollection();
+            NavigationThemeTransition theme = new NavigationThemeTransition();
+
+            var info = new ContinuumNavigationTransitionInfo();
+
+            theme.DefaultNavigationTransitionInfo = info;
+            collection.Add(theme);
+            this.Transitions = collection;
+        }
+
+        private async void InitAsync()
+        {
+            var connection = this.GetDbConnectionAsync();
+            await connection.CreateTableAsync<GeoPositionPoint>();
+        }
+        private SQLiteAsyncConnection GetDbConnectionAsync()
+        {
+            var dbFilePath = Path.Combine(ApplicationData.Current.LocalFolder.Path, "db.sqlite");
+
+            var connectionFactory =
+                new Func<SQLiteConnectionWithLock>(
+                    () =>
+                    new SQLiteConnectionWithLock(
+                        new SQLitePlatformWinRT(),
+                        new SQLiteConnectionString(dbFilePath, storeDateTimeAsTicks: false)));
+
+            var asyncConnection = new SQLiteAsyncConnection(connectionFactory);
+
+            return asyncConnection;
+        }
+
+        private IEnumerable<ProductViewModel> GetProductsList()
         {
             // here you can get the products from the server 
 
@@ -99,6 +151,21 @@ namespace Fridger.WindowsUniversalApp.Pages
             }
         }
 
+        private async void OnShowSavedLocationsClick(object sender, RoutedEventArgs e)
+        {
+            var connection = this.GetDbConnectionAsync();
+            var userData = await connection.Table<Geoposition>()
+                .ToListAsync();
+           
+            var userDataAsString = new StringBuilder();
+            foreach (var userItem in userData)
+            {
+                userDataAsString.AppendLine(string.Format("Latitude:{0}, Longitude:{1}", userItem.Coordinate.Latitude, userItem.Coordinate.Longitude));
+            }
+
+            this.SavedLocations.Text = userDataAsString.ToString();
+        }
+
         private async void OnSaveCurrentLocationClick(object sender, RoutedEventArgs e)
         {
             // Request permission to access location
@@ -112,10 +179,14 @@ namespace Fridger.WindowsUniversalApp.Pages
 
                 await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                  {
-                     var message = string.Format("Your current location is:  Latitude:{0}, Longitude: {1}", lat, lon);
-                     var dialog = new MessageDialog(message);
-                     dialog.Commands.Add(new UICommand("OK"));
-                     await dialog.ShowAsync();
+                     var connection = this.GetDbConnectionAsync();
+                     var position = new GeoPositionPoint(lat, lon);
+                     var result = await connection.InsertAsync(position);
+
+                     //var message = string.Format("Your current location is:  Latitude:{0}, Longitude: {1}", lat, lon);
+                     //var dialog = new MessageDialog(message);
+                     //dialog.Commands.Add(new UICommand("OK"));
+                     //await dialog.ShowAsync();
                  });
             }
             else

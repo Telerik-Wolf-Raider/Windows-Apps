@@ -9,7 +9,9 @@
         public int Id { get; set; }
 
         public string Name { get; set; }
-        
+
+        public string ImageSource { get; set; }
+                
         /// <summary>
         /// if null - it is not present in the fridge but should not be bought
         /// </summary>
