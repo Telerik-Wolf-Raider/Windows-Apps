@@ -51,6 +51,10 @@ namespace Fridger.WindowsUniversalApp
             dialog.Commands.Add(new UICommand("OK"));
             await dialog.ShowAsync();
         }
+        private void OnAddProductAppBarButtonClick(object sender, RoutedEventArgs e)
+        {
+            this.AppFrame.Navigate(typeof(AddProductsPage));
+        }
 
         private void OnLoginAppBarButtonClick(object sender, RoutedEventArgs e)
         {
@@ -65,6 +69,11 @@ namespace Fridger.WindowsUniversalApp
         private void OnSettingsAppBarButtonClick(object sender, RoutedEventArgs e)
         {
             this.AppFrame.Navigate(typeof(SettingsPage));
+        }
+
+        private void OnDatabaseAppBarButtonClick(object sender, RoutedEventArgs e)
+        {
+            this.AppFrame.Navigate(typeof(GetProductsFromDatabase));
         }
     }
 }
