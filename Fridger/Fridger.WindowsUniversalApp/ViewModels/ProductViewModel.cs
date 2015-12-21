@@ -29,6 +29,6 @@
 
         public string ProductName { get; set; }
         public string ImgSource { get; set; }
-        public string Value { get; internal set; }
+        public string Value { get; set; }
     }
 }

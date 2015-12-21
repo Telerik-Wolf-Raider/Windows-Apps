@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Fridger.WindowsUniversalApp.ViewModels
 {
-    public class ShoppingPageViewModel : ViewModelBase, IPageViewModel
+   public  class FridgeInventoryViewModel : ViewModelBase, IPageViewModel
     {
-        public ShoppingPageViewModel(IContentViewModel contentViewModel)
+        public FridgeInventoryViewModel(IContentViewModel contentViewModel)
         {
             this.ContentViewModel = contentViewModel;
         }
@@ -17,7 +17,7 @@ namespace Fridger.WindowsUniversalApp.ViewModels
         {
             get
             {
-                return "Shopping Mode page";
+                return "Fridge inventory page";
             }
         }
 

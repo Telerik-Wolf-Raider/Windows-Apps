@@ -2,6 +2,7 @@
 using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
@@ -32,6 +33,7 @@ namespace Fridger.WindowsUniversalApp
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
 #endif
+            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.FullScreen;
 
             AppShell shell = Window.Current.Content as AppShell;
 
@@ -53,6 +55,7 @@ namespace Fridger.WindowsUniversalApp
             {
                 shell.AppFrame.Navigate(typeof(HomePage), e.Arguments);
             }
+
             Window.Current.Activate();
         }
 

@@ -106,6 +106,7 @@
     </Compile>
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Helpers\DelegateCommand.cs" />
+    <Compile Include="Helpers\Notifier.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -116,6 +117,9 @@
       <DependentUpon>AddProductsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\AnimatedTransitionPage.cs" />
+    <Compile Include="Pages\FridgeInventoryPage.xaml.cs">
+      <DependentUpon>FridgeInventoryPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\GetProductsFromDatabase.xaml.cs">
       <DependentUpon>GetProductsFromDatabase.xaml</DependentUpon>
     </Compile>
@@ -129,6 +133,7 @@
       <DependentUpon>ShoppingModePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\FridgeInventoryViewModel.cs" />
     <Compile Include="ViewModels\IContentViewModel.cs" />
     <Compile Include="ViewModels\IPageViewModel.cs" />
     <Compile Include="ViewModels\LoginFormViewModel.cs" />
@@ -156,6 +161,11 @@
     <None Include="Fridger.WindowsUniversalApp_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\beer.jpg" />
+    <Content Include="Images\cat-burrito.jpg" />
+    <Content Include="Images\Not_available.jpg" />
+    <Content Include="Images\nutella-spray.jpg" />
+    <Content Include="Images\water.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -183,6 +193,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\AddProductsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\FridgeInventoryPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -220,6 +234,7 @@
       <Name>SQLite for Universal App Platform</Name>
     </SDKReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

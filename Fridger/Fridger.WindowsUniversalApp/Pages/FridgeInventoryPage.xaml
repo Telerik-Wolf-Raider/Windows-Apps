@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="Fridger.WindowsUniversalApp.Pages.ShoppingModePage"
+    x:Class="Fridger.WindowsUniversalApp.Pages.FridgeInventoryPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Fridger.WindowsUniversalApp.Pages"
@@ -8,22 +8,21 @@
     xmlns:controls="using:Fridger.WindowsUniversalApp.Controls"
     xmlns:viewModels="using:Fridger.WindowsUniversalApp.ViewModels"
     mc:Ignorable="d">
+
     <Page.Resources>
         <DataTemplate x:Key="productItemTemplate">
             <controls:ProductDetails    
-                DoubleTapped="ProductDetails_DoubleTapped"
-                Holding="ProductDetails_Holding"   
+                Holding="ProductDetails_Holding"
+                                  DoubleTapped="ProductDetails_DoubleTapped"
                                   Source="{Binding ImgSource}"
                                   ProductName="{Binding ProductName}"
-                ProductId="{Binding Value}"
+                                  ProductId="{Binding Value}"
                                   Swipe="{Binding Move}"/>
-            
+
         </DataTemplate>
     </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
+        <Grid.RowDefinitions>            
             <RowDefinition Height="50"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="50"/>
@@ -32,28 +31,18 @@
               Grid.Row="0">
             <TextBlock Text="{Binding Title}" 
                        Style="{StaticResource TitleStyle}"/>
-        </Grid>
-        <Grid  Grid.Row="1" Name="gridCurrentLocation">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <TextBlock Name="tbCurrentLocation" Text="Add this shop to your favorites: " TextWrapping="WrapWholeWords"/>
-            <Button Grid.Column="1" Content="Save current location" Click="OnSaveCurrentLocationClick"/>
-        </Grid>
-        <Button Grid.Row="2" Content="Show saved locations" Click="OnShowSavedLocationsClick"/>
-        <TextBlock Name="SavedLocations"/>
+        </Grid>       
         <Grid Name="panelContent"
-              Grid.Row="3">
+              Grid.Row="1">
             <ListBox ItemsSource="{Binding ContentViewModel.Products}"
                      ItemTemplate="{StaticResource productItemTemplate}"/>
         </Grid>
-        <Grid Grid.Row="4" >
+        <Grid Grid.Row="2" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.6*"/>
                 <ColumnDefinition Width="0.4*"/>
             </Grid.ColumnDefinitions>
-            <Button  Grid.Column="0" Background="GreenYellow" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Finish shopping" />
+            <Button  Grid.Column="0" Background="GreenYellow" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Finish inventory check" />
             <Button  Grid.Column="1" Background="Pink" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Cancel" />
         </Grid>
     </Grid>

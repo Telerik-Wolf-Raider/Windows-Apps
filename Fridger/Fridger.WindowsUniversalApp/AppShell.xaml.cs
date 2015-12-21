@@ -75,5 +75,10 @@ namespace Fridger.WindowsUniversalApp
         {
             this.AppFrame.Navigate(typeof(GetProductsFromDatabase));
         }
+
+        private void OnFridgeInventoryAppBarButtonClick(object sender, RoutedEventArgs e)
+        {
+            this.AppFrame.Navigate(typeof(FridgeInventoryPage));
+        }
     }
 }

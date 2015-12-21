@@ -14,8 +14,9 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
-            <Image Name="imgProductImage" Grid.Column="0"/>
-            <TextBlock Name="tbProductName"
+        <TextBlock Name="tbProductId"  Visibility="Collapsed"/>
+        <Image Name="imgProductImage" Grid.Column="0"/>
+        <TextBlock Name="tbProductName"
                    FontSize="36"
                    TextAlignment="Center"
                    Grid.Column="1"/>

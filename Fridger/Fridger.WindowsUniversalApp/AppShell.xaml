@@ -32,9 +32,9 @@
                 <AppBarButton Content="Login"
                           Click="OnLoginAppBarButtonClick"
                           Icon="AddFriend"/>
-                <AppBarButton Content="Households"
-                          Click="OnAddAppBarButtonClick"
-                          Icon="Calendar"/>
+                <AppBarButton Content="Fridge Inventory"
+                          Click="OnFridgeInventoryAppBarButtonClick"
+                          Icon="List"/>
                 <AppBarButton Content="ShoppingMode"
                           Click="OnShoppingModeAppBarButtonClick"
                           Icon="Shop"/>

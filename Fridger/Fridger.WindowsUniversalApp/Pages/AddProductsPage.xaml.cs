@@ -1,4 +1,5 @@
-﻿using Fridger.WindowsUniversalApp.Models;
+﻿using Fridger.WindowsUniversalApp.Helpers;
+using Fridger.WindowsUniversalApp.Models;
 using SQLite.Net;
 using SQLite.Net.Async;
 using SQLite.Net.Platform.WinRT;
@@ -42,7 +43,7 @@ namespace Fridger.WindowsUniversalApp.Pages
             {
                 return new BitmapImage();
             }
-        }        
+        }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
@@ -111,10 +112,13 @@ namespace Fridger.WindowsUniversalApp.Pages
             StorageFile file = await openPicker.PickSingleFileAsync();
             string message;
             if (file != null)
-            {                
+            {
                 // Application now has read/write access to the picked file
                 // OutputTextBlock.Text = "Picked photo: " + file.Name;
-                this.ImageSourceTextBox.Text = file.Path;
+
+                //this.ImageSourceTextBox.Text = path.ToString();
+                this.TestingImage.Source = new BitmapImage(new Uri("ms-appx:///Images/" + file.Name));
+                // this.ImageSourceTextBox.Text = file.Path;
                 message = string.Format("Successful upload of picture!");
             }
             else
@@ -124,31 +128,53 @@ namespace Fridger.WindowsUniversalApp.Pages
 
             }
             var dialog = new MessageDialog(message);
-                dialog.Commands.Add(new UICommand("OK"));
-                await dialog.ShowAsync();
+            dialog.Commands.Add(new UICommand("OK"));
+            await dialog.ShowAsync();
         }
 
         private async void AddNewProductButtonClick(object sender, RoutedEventArgs e)
         {
+            string source = "ms-appx:///Images/Not_available.jpg";
+            if (this.TestingImage.Source != null)
+            {
+                source = (this.TestingImage.Source as BitmapImage).UriSource.OriginalString;
+            }
+
+            var name = this.NameTextBox.Text;
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                Notifier.Notify("Please enter a name");
+                return;
+            }
+
             var connection = this.GetDbConnectionAsync();
             var product = new Product
             {
-                Name = this.NameTextBox.Text,
+                Name = name,
+                //ImageSource = ImageSourceTextBox.Text,
+                ImageSource = source,
                 ShouldBeBougth = this.shouldAddToToBuyList.IsChecked
             };
+
             var dbProduct = await connection.Table<Product>()
                 .Where(p => p.Name.ToLower() == product.Name.ToLower())
                 .FirstOrDefaultAsync();
             if (dbProduct == null)
             {
                 await this.InsertProductAsync(product);
-                // TODO: Notify user
+                Notifier.Notify("Product added!");
             }
             else
             {
                 dbProduct.ShouldBeBougth = product.ShouldBeBougth;
+                dbProduct.ImageSource = source;
+                //dbProduct.ImageSource = ImageSourceTextBox.Text;
                 await connection.UpdateAsync(dbProduct);
+                Notifier.Notify("Product updated!");
             }
+            this.TestingImage.Source = null;
+            this.NameTextBox.Text = string.Empty;
+
         }
 
         private async void GetAllFromFridgeButtonClick(object sender, RoutedEventArgs e)

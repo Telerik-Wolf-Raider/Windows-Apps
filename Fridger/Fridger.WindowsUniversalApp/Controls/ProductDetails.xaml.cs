@@ -44,7 +44,26 @@ namespace Fridger.WindowsUniversalApp.Controls
                 command.Execute(args);
             };
         }
-        
+
+
+
+        public string ProductId
+        {
+            get { return (string)GetValue(ProductIdProperty); }
+            set { SetValue(ProductIdProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ProductId.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ProductIdProperty =
+            DependencyProperty.Register("ProductId", typeof(string), typeof(ProductDetails), new PropertyMetadata(null, new PropertyChangedCallback(HandleProductIdChanged)));
+
+        private static void HandleProductIdChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var control = d as ProductDetails;
+            var newValue = e.NewValue.ToString();
+            control.tbProductId.Text = newValue;
+        }
+
         public string ProductName
         {
             get { return (string)GetValue(ProductNameProperty); }
@@ -75,7 +94,7 @@ namespace Fridger.WindowsUniversalApp.Controls
                
         private static void HandleSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var control = d as ProductDetails;
+            var control = d as ProductDetails;            
             var newValue = e.NewValue.ToString();
             var imageSource = new BitmapImage(new Uri(newValue));
             control.imgProductImage.Source = imageSource;
