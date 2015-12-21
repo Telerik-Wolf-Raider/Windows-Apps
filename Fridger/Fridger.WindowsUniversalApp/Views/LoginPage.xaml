@@ -16,7 +16,6 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="2*"/>
-            <RowDefinition Height="0.5*"/>
         </Grid.RowDefinitions>
         <TextBlock Text="Welcome to The Login screen!"
                    TextWrapping="WrapWholeWords"
@@ -63,10 +62,5 @@
                     CommandParameter="{StaticResource newLoginForm}"
                     Click="OnLoginButtonClick" />
         </Grid>
-        <Button Grid.Row="3"
-            Content="Go to home page!"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                Click="OnGoToHomePageClick"/>
     </Grid>
 </Page>

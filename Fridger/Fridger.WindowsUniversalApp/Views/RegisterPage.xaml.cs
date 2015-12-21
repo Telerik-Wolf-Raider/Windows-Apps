@@ -34,14 +34,13 @@ namespace Fridger.WindowsUniversalApp.Views
         {
             this.InitializeComponent();
             this.httpClient = new HttpClient();
-            //var contentViewModel = new RegisterFormContentViewModel();
-            //this.DataContext = new MainPageViewModel(contentViewModel);
         }
 
         private void OnGoToHomePageClick(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(MainPage));
         }
+
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
@@ -65,10 +64,16 @@ namespace Fridger.WindowsUniversalApp.Views
             collection.Add(theme);
             this.Transitions = collection;
         }
+
         private async void PostButtonClick(object sender, RoutedEventArgs e)
         { 
-            // should use system.web http client
-            var reg = (sender as Button).CommandParameter;
+            var reg = (sender as Button).CommandParameter as RegisterFormViewModel;
+            if (reg == null || string.IsNullOrWhiteSpace(reg.UserName) || reg.UserName.Length < 5 || string.IsNullOrWhiteSpace(reg.Password) || reg.Password != reg.ConfirmPassword)
+            {
+                this.NotificationTextBlock.Text = "Invalid form!";
+                return;
+            }
+
             this.NotificationTextBlock.Text = string.Empty;
             var url = "http://localhost:57647" +"/api/account/register";
             var content = new StringContent(JsonConvert.SerializeObject(reg), Encoding.UTF8, "application/json");

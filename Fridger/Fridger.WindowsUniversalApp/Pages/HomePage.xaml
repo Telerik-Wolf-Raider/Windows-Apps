@@ -6,8 +6,28 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel.Resources>
+            <Style 
+               TargetType="Button">
+                <Setter Property="FontSize" Value="36"/>
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="Margin" Value="10"/>
+            </Style>
+        </StackPanel.Resources>
+       <TextBlock Text="Welcome to Home" FontSize="72" HorizontalAlignment="Center"/>
+        <TextBlock Margin="20" Text="Are you ready for the daily dose of shopping? You can go to the shop and access the To-Buy-List and go in shopping mode by clicking here" FontSize="36" HorizontalAlignment="Center" TextWrapping="WrapWholeWords"></TextBlock>
+        <Button Content="Shopping mode" Click="OnShoppingModeButtonClick"/>
+        
+        <TextBlock Margin="20" Text="Or you can add products for the shopahiolics to buy here" FontSize="36" HorizontalAlignment="Center" TextWrapping="WrapWholeWords"></TextBlock>
+        <Button Content="Check fridge inventory" Click="OnFridgeInventoryButtonClick"/>
 
-    </Grid>
+        <TextBlock Margin="20" Text="Not a member? Sign up here" FontSize="36" HorizontalAlignment="Center" TextWrapping="WrapWholeWords"></TextBlock>
+        <Button Content="Register" Click="OnLoginButtonClick"/>
+
+        <TextBlock Margin="20" Text="Already a member? Sign in here" FontSize="36" HorizontalAlignment="Center" TextWrapping="WrapWholeWords"></TextBlock>
+        <Button Content="Login" Click="OnRegisterButtonClick"/>
+    </StackPanel>
 </Page>

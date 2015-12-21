@@ -198,6 +198,9 @@ namespace Fridger.WindowsUniversalApp.Pages
             }
         }
 
-
+        private void OnFinishInventoryCheckButtonClick(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(HomePage));
+        }
     }
 }

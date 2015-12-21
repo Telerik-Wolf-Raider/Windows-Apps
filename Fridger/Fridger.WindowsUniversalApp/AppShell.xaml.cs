@@ -45,7 +45,6 @@ namespace Fridger.WindowsUniversalApp
 
         private async void OnAddAppBarButtonClick(object sender, RoutedEventArgs e)
         {
-            //this.AppFrame.Navigate(typeof(AddSuperheroPage));
             var message = string.Format("You just clicked the button {0}", (sender as Button).Content);
             var dialog = new MessageDialog(message);
             dialog.Commands.Add(new UICommand("OK"));
@@ -59,6 +58,11 @@ namespace Fridger.WindowsUniversalApp
         private void OnLoginAppBarButtonClick(object sender, RoutedEventArgs e)
         {
             this.AppFrame.Navigate(typeof(LoginPage));
+        }
+
+        private void OnRegisterAppBarButtonClick(object sender, RoutedEventArgs e)
+        {
+            this.AppFrame.Navigate(typeof(RegisterPage));
         }
 
         private void OnShoppingModeAppBarButtonClick(object sender, RoutedEventArgs e)

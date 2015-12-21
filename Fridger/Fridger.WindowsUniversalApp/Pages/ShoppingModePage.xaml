@@ -26,7 +26,7 @@
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="150"/>
         </Grid.RowDefinitions>
         <Grid Name="panelTitle"
               Grid.Row="0">
@@ -41,7 +41,7 @@
             <TextBlock Name="tbCurrentLocation" Text="Add this shop to your favorites: " TextWrapping="WrapWholeWords"/>
             <Button Grid.Column="1" Content="Save current location" Click="OnSaveCurrentLocationClick"/>
         </Grid>
-        <Button Grid.Row="2" Content="Show saved locations" Click="OnShowSavedLocationsClick"/>
+        <!--<Button Grid.Row="2" Content="Show saved locations" Click="OnShowSavedLocationsClick"/>-->
         <TextBlock Name="SavedLocations"/>
         <Grid Name="panelContent"
               Grid.Row="3">
@@ -53,8 +53,8 @@
                 <ColumnDefinition Width="0.6*"/>
                 <ColumnDefinition Width="0.4*"/>
             </Grid.ColumnDefinitions>
-            <Button  Grid.Column="0" Background="GreenYellow" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Finish shopping" />
-            <Button  Grid.Column="1" Background="Pink" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Cancel" />
+            <Button  Grid.Column="0" Background="GreenYellow" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Finish shopping" Click="OnFinishShoppingButtonClick" />
+            <Button  Grid.Column="1" Background="Pink" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Cancel" Click="OnFinishShoppingButtonClick" />
         </Grid>
     </Grid>
 </Page>

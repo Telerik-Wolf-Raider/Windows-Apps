@@ -106,6 +106,7 @@
     </Compile>
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Helpers\DelegateCommand.cs" />
+    <Compile Include="Helpers\ImageConverter.cs" />
     <Compile Include="Helpers\Notifier.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>

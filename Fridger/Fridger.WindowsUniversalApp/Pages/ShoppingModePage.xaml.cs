@@ -51,12 +51,14 @@ namespace Fridger.WindowsUniversalApp.Pages
         {
             base.OnNavigatedFrom(e);
             AnimatedTransition();
+            Notifier.Notify("Hope you enjoyed your shopping ^^!");
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
             AnimatedTransition();
+            Notifier.Notify("Enjoy your shopping ^^!");
         }
 
         public void AnimatedTransition()
@@ -108,8 +110,7 @@ namespace Fridger.WindowsUniversalApp.Pages
             {
                 products.Add(new ProductViewModel(userItem.Name, userItem.ImageSource, userItem.Id.ToString()));
             }
-
-            //this.AllItemsFromToBuyListTextBlock.Text = userDataAsString.ToString();
+            
             return products;
         }
 
@@ -143,8 +144,7 @@ namespace Fridger.WindowsUniversalApp.Pages
         }
         
         private async void ProductDetails_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
-        {
-            //this.AppFrame.Navigate(typeof(AddSuperheroPage));
+        {            
             var product = sender as ProductDetails;
             string message;
 
@@ -222,6 +222,7 @@ namespace Fridger.WindowsUniversalApp.Pages
             {
                 return;
             }
+
             var product = sender as ProductDetails;
             string message;
             var commandLabel = "Delete";
@@ -264,6 +265,11 @@ namespace Fridger.WindowsUniversalApp.Pages
                 dialog.Commands.Add(new UICommand("OK"));
                 await dialog.ShowAsync();
             }
+        }
+
+        private void OnFinishShoppingButtonClick(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(HomePage));
         }
     }
 }

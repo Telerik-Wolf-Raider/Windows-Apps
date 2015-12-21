@@ -15,7 +15,6 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="4*"/>
-            <RowDefinition Height="0.5*"/>
         </Grid.RowDefinitions>
         <TextBlock Text="Welcome to The register screen!"
                    TextWrapping="WrapWholeWords"
@@ -73,10 +72,5 @@
                     CommandParameter="{StaticResource newRegisterForm}"
                     Click="PostButtonClick" />
         </Grid>
-        <Button Grid.Row="3"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                Click="OnGoToHomePageClick"
-                Content="Go to home page!"/>
     </Grid>
 </Page>

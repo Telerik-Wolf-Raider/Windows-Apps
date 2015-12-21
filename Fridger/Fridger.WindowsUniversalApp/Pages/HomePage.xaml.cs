@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Fridger.WindowsUniversalApp.Views;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -27,6 +28,7 @@ namespace Fridger.WindowsUniversalApp.Pages
         {
             this.InitializeComponent();
         }
+
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
@@ -49,6 +51,22 @@ namespace Fridger.WindowsUniversalApp.Pages
             theme.DefaultNavigationTransitionInfo = info;
             collection.Add(theme);
             this.Transitions = collection;
+        }
+        private void OnShoppingModeButtonClick(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(ShoppingModePage));
+        }
+        private void OnFridgeInventoryButtonClick(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(FridgeInventoryPage));
+        }
+        private void OnLoginButtonClick(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(RegisterPage));
+        }
+        private void OnRegisterButtonClick(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(LoginPage));
         }
     }
 }

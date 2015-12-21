@@ -5,63 +5,27 @@ using SQLite.Net.Async;
 using SQLite.Net.Platform.WinRT;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
 using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.Media.Capture;
 using Windows.Storage;
 using Windows.Storage.Pickers;
-using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace Fridger.WindowsUniversalApp.Pages
 {
-    public sealed class ImageConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, string language)
-        {
-            try
-            {
-                return new BitmapImage(new Uri((string)value));
-            }
-            catch
-            {
-                return new BitmapImage();
-            }
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, string language)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class AddProductsPage : Page
     {
         public AddProductsPage()
         {
             this.InitializeComponent();
             this.InitAsync();
-            //this.AddProductPictureButton.Click += new RoutedEventHandler(AddProductPictureButtonClick);
         }
+
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
@@ -94,15 +58,11 @@ namespace Fridger.WindowsUniversalApp.Pages
             if (photo != null)
             {
                 ProductCapture.Source = new BitmapImage(new Uri(photo.Path));
-                //this.ImageSourceTextBox.Text = photo.Path;
             }
         }
 
         private async void AddProductPictureButtonClick(object sender, RoutedEventArgs e)
         {
-            // Clear previous returned file name, if it exists, between iterations of this scenario
-            //OutputTextBlock.Text = "";
-
             FileOpenPicker openPicker = new FileOpenPicker();
             openPicker.ViewMode = PickerViewMode.Thumbnail;
             openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
@@ -112,24 +72,17 @@ namespace Fridger.WindowsUniversalApp.Pages
             StorageFile file = await openPicker.PickSingleFileAsync();
             string message;
             if (file != null)
-            {
-                // Application now has read/write access to the picked file
-                // OutputTextBlock.Text = "Picked photo: " + file.Name;
-
-                //this.ImageSourceTextBox.Text = path.ToString();
+            {                
                 this.TestingImage.Source = new BitmapImage(new Uri("ms-appx:///Images/" + file.Name));
-                // this.ImageSourceTextBox.Text = file.Path;
                 message = string.Format("Successful upload of picture!");
             }
             else
             {
-                // OutputTextBlock.Text = "Operation cancelled.";
                 message = string.Format("No file picked!");
 
             }
-            var dialog = new MessageDialog(message);
-            dialog.Commands.Add(new UICommand("OK"));
-            await dialog.ShowAsync();
+
+            Notifier.Notify(message);
         }
 
         private async void AddNewProductButtonClick(object sender, RoutedEventArgs e)
@@ -151,7 +104,6 @@ namespace Fridger.WindowsUniversalApp.Pages
             var product = new Product
             {
                 Name = name,
-                //ImageSource = ImageSourceTextBox.Text,
                 ImageSource = source,
                 ShouldBeBougth = this.shouldAddToToBuyList.IsChecked
             };
@@ -168,38 +120,37 @@ namespace Fridger.WindowsUniversalApp.Pages
             {
                 dbProduct.ShouldBeBougth = product.ShouldBeBougth;
                 dbProduct.ImageSource = source;
-                //dbProduct.ImageSource = ImageSourceTextBox.Text;
                 await connection.UpdateAsync(dbProduct);
                 Notifier.Notify("Product updated!");
             }
+
             this.TestingImage.Source = null;
             this.NameTextBox.Text = string.Empty;
-
         }
 
-        private async void GetAllFromFridgeButtonClick(object sender, RoutedEventArgs e)
-        {
-            var userData = await this.GetAllProductAsync(false);
-            var userDataAsString = new StringBuilder();
-            foreach (var userItem in userData)
-            {
-                userDataAsString.AppendLine(userItem.ToString());
-            }
+        //private async void GetAllFromFridgeButtonClick(object sender, RoutedEventArgs e)
+        //{
+        //    var userData = await this.GetAllProductAsync(false);
+        //    var userDataAsString = new StringBuilder();
+        //    foreach (var userItem in userData)
+        //    {
+        //        userDataAsString.AppendLine(userItem.ToString());
+        //    }
 
-            this.AllItemsFromFridgeTextBlock.Text = userDataAsString.ToString();
-        }
+        //    this.AllItemsFromFridgeTextBlock.Text = userDataAsString.ToString();
+        //}
 
-        private async void GetAllFromToBuyListButtonClick(object sender, RoutedEventArgs e)
-        {
-            var userData = await this.GetAllProductAsync(true);
-            var userDataAsString = new StringBuilder();
-            foreach (var userItem in userData)
-            {
-                userDataAsString.AppendLine(userItem.ToString());
-            }
+        //private async void GetAllFromToBuyListButtonClick(object sender, RoutedEventArgs e)
+        //{
+        //    var userData = await this.GetAllProductAsync(true);
+        //    var userDataAsString = new StringBuilder();
+        //    foreach (var userItem in userData)
+        //    {
+        //        userDataAsString.AppendLine(userItem.ToString());
+        //    }
 
-            this.AllItemsFromToBuyListTextBlock.Text = userDataAsString.ToString();
-        }
+        //    this.AllItemsFromToBuyListTextBlock.Text = userDataAsString.ToString();
+        //}
 
         private SQLiteAsyncConnection GetDbConnectionAsync()
         {
