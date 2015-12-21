@@ -17,11 +17,12 @@
             </Style>
         </Grid.Resources>
         <StackPanel>
-            <Button Content="Manage Households"/>
-            <Button Content="Manage Fridges"/>
-            <Button Content="Manage Pinpointed Shops"/>
-            <Button Content="Manage Account Settings"/>
-            <Button Content="Upgrade to Premium" 
+            <TextBlock FontSize="72" Text="Settings page" HorizontalAlignment="Center"/>
+            <Button Margin="50" Content="Manage Households"/>
+            <Button Margin="50" Content="Manage Fridges"/>
+            <Button Margin="50" Content="Manage Pinpointed Shops"/>
+            <Button Margin="50" Content="Manage Account Settings"/>
+            <Button Margin="50" Content="Upgrade to Premium" 
                     Background="GreenYellow"
                     FontSize="42"/>
         </StackPanel>

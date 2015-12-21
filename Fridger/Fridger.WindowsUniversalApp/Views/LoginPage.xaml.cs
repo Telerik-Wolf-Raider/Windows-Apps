@@ -1,4 +1,5 @@
-﻿using Fridger.WindowsUniversalApp.ViewModels;
+﻿using Fridger.WindowsUniversalApp.Helpers;
+using Fridger.WindowsUniversalApp.ViewModels;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -71,22 +72,23 @@ namespace Fridger.WindowsUniversalApp.Views
             var reg = (sender as Button).CommandParameter as LoginFormViewModel;
             if (reg == null || string.IsNullOrWhiteSpace(reg.Password) || string.IsNullOrWhiteSpace(reg.UserName) || reg.UserName.Length < 5 )
             {
-                this.NotificationTextBlock.Text = "Invalid form!";
+                Notifier.Notify("Invalid form!");
                 return; 
             }
 
-            this.NotificationTextBlock.Text = string.Empty;
+            //this.NotificationTextBlock.Text = string.Empty;
             var url = "http://localhost:57647" + "/token";
             
             var content = new StringContent("grant_type=password&username=" + reg.UserName + "&password=" + reg.Password, Encoding.UTF8, "application/x-www-form-urlencoded");
-            this.NotificationTextBlock.Text = "Loading...";
+            //this.NotificationTextBlock.Text = "Loading...";
 
             var response = await this.httpClient.PostAsync(new Uri(url), content);           
             var resultContent = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<TokenKeyValuePair>(resultContent);
             //Newtonsoft.Json.Converters.KeyValuePairConverter()
             //receive json object { "access_token":"TOKEN_STRING_HERE"}
-            this.NotificationTextBlock.Text = result.AccessToken;
+            Notifier.Notify("Logged in successfully!"); 
+            Frame.Navigate(typeof(Pages.HomePage));
         }
     }
 

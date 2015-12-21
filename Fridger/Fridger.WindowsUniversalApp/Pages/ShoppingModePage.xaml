@@ -17,7 +17,7 @@
                                   ProductName="{Binding ProductName}"
                 ProductId="{Binding Value}"
                                   Swipe="{Binding Move}"/>
-            
+
         </DataTemplate>
     </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -30,16 +30,16 @@
         </Grid.RowDefinitions>
         <Grid Name="panelTitle"
               Grid.Row="0">
-            <TextBlock Text="{Binding Title}" 
-                       Style="{StaticResource TitleStyle}"/>
+            <TextBlock Text="{Binding Title}"
+                                             Style="{StaticResource TitleStyle}"/>
         </Grid>
         <Grid  Grid.Row="1" Name="gridCurrentLocation">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <TextBlock Name="tbCurrentLocation" Text="Add this shop to your favorites: " TextWrapping="WrapWholeWords"/>
-            <Button Grid.Column="1" Content="Save current location" Click="OnSaveCurrentLocationClick"/>
+            <TextBlock Name="tbCurrentLocation" VerticalAlignment="Center" FontSize="20" Text="Add this shop to your favorites: " TextWrapping="WrapWholeWords"/>
+            <Button Grid.Column="1" FontSize="20" Content="Save current location" Click="OnSaveCurrentLocationClick"/>
         </Grid>
         <!--<Button Grid.Row="2" Content="Show saved locations" Click="OnShowSavedLocationsClick"/>-->
         <TextBlock Name="SavedLocations"/>

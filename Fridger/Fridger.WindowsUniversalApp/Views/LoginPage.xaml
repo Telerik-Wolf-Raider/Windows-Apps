@@ -14,21 +14,12 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
         <TextBlock Text="Welcome to The Login screen!"
                    TextWrapping="WrapWholeWords"
                    HorizontalAlignment="Center"
                    FontSize="36"/>
-        <ScrollViewer Grid.Row="1">
-            <TextBlock x:Name="NotificationTextBlock"                   
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   TextWrapping="Wrap"
-                   FontSize="24"
-                   Text="Notification Block" />
-        </ScrollViewer> 
         <Grid Name="panelAdd"
               Grid.Row="2">
             <Grid.Resources>
@@ -47,17 +38,21 @@
                 </Grid.RowDefinitions>
                 <TextBox Name="tbUserName"
                         PlaceholderText="Enter Username" 
+                         FontSize="32"
                      Grid.Row="0"
                      Text="{Binding UserName, Mode=TwoWay}"/>
-               
-                <TextBox Name="tbPassword"
+
+                <PasswordBox Name="tbPassword"
                         PlaceholderText="Enter Password" 
+                         FontSize="32"
                      Grid.Row="2"
-                     Text="{Binding Password, Mode=TwoWay}"/>
+                     Password="{Binding Password, Mode=TwoWay}"/>
             </Grid>
             <Button Content="Login"  
                 Grid.Row="3"
                 HorizontalAlignment="Stretch"
+                    FontSize="32"
+                    Background="GreenYellow"
                 VerticalAlignment="Stretch"
                     CommandParameter="{StaticResource newLoginForm}"
                     Click="OnLoginButtonClick" />

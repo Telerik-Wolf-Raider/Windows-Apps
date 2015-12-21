@@ -1,4 +1,5 @@
-﻿using Fridger.WindowsUniversalApp.ViewModels;
+﻿using Fridger.WindowsUniversalApp.Helpers;
+using Fridger.WindowsUniversalApp.ViewModels;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -70,19 +71,19 @@ namespace Fridger.WindowsUniversalApp.Views
             var reg = (sender as Button).CommandParameter as RegisterFormViewModel;
             if (reg == null || string.IsNullOrWhiteSpace(reg.UserName) || reg.UserName.Length < 5 || string.IsNullOrWhiteSpace(reg.Password) || reg.Password != reg.ConfirmPassword)
             {
-                this.NotificationTextBlock.Text = "Invalid form!";
+                Notifier.Notify("Invalid Form");
                 return;
             }
 
-            this.NotificationTextBlock.Text = string.Empty;
+          
             var url = "http://localhost:57647" +"/api/account/register";
             var content = new StringContent(JsonConvert.SerializeObject(reg), Encoding.UTF8, "application/json");
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             var response = await this.httpClient.PostAsync(new Uri(url), content);
             var result = await response.Content.ReadAsStringAsync();
-
-            this.NotificationTextBlock.Text = result;
-
+            Notifier.Notify("Registered sucessfully!");
+            Frame.Navigate(typeof(LoginPage));
+            
         }
     }
 }
