@@ -53,8 +53,8 @@
                 <ColumnDefinition Width="0.6*"/>
                 <ColumnDefinition Width="0.4*"/>
             </Grid.ColumnDefinitions>
-            <Button  Grid.Column="0" Background="GreenYellow" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Finish shopping" Click="OnFinishShoppingButtonClick" />
-            <Button  Grid.Column="1" Background="Pink" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Cancel" Click="OnFinishShoppingButtonClick" />
+            <Button FontSize="28"  Grid.Column="0" Background="GreenYellow" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Finish shopping" Click="OnFinishShoppingButtonClick" />
+            <Button FontSize="28"  Grid.Column="1" Background="Pink" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Cancel" Click="OnFinishShoppingButtonClick" />
         </Grid>
     </Grid>
 </Page>
